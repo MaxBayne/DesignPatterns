@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="A_Creational Patterns\" />
+    <Folder Include="C_Behavior Patterns\" />
+    <Folder Include="B_Structure Patterns\" />
+  </ItemGroup>
+
+</Project>
