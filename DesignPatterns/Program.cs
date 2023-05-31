@@ -10,7 +10,7 @@ namespace DesignPatterns
             Console.WriteLine("==========================");
 
             Console.WriteLine("--------------------------------------------------------------");
-            Console.WriteLine("Singleton Pattern");
+            Console.WriteLine("### Singleton Pattern ###");
 
 
             //For Single Thread ----------------
@@ -25,7 +25,24 @@ namespace DesignPatterns
 
             Console.WriteLine("--------------------------------------------------------------");
 
+            Console.WriteLine("### Factory Pattern ###");
 
+            var sedan = Factory.getCar("S");
+            sedan.printName();
+
+            var subuv = Factory.getCar("U");
+            subuv.printName();
+
+            var truck = Factory.getCar("T");
+            truck.printName();
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Builder Pattern ###");
+
+            
+
+            Console.WriteLine("--------------------------------------------------------------");
 
 
 
