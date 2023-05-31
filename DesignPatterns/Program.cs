@@ -40,7 +40,10 @@ namespace DesignPatterns
 
             Console.WriteLine("### Builder Pattern ###");
 
+            var robotBuilder = new Builder(new Robot());
+            var builtedRobot = robotBuilder.buildRobot();
             
+            builtedRobot.PrintInfo();
 
             Console.WriteLine("--------------------------------------------------------------");
 
