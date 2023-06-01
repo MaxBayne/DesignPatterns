@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.A_Creational_Patterns;
+using DesignPatterns.B_Structure_Patterns;
 
 namespace DesignPatterns
 {
@@ -17,17 +18,26 @@ namespace DesignPatterns
 
             //For Single Thread ----------------
             Console.WriteLine("\n(From Single Thread)");
-            Get_Singleton_1();
-            Get_Singleton_2();
+            Singleton.GetInstance().Print_Message("Hello World");
+            Singleton.GetInstance().Print_Message("How Are You");
+
+            
             
             //For Multi Thread ----------------
             Console.WriteLine("\n(From Multi Thread)");
-            Parallel.Invoke(Get_Singleton_1, Get_Singleton_2);
+            Parallel.Invoke(() =>
+            {
+                Singleton.GetInstance().Print_Message("Hello World");
+            },
+                () =>
+                {
+                    Singleton.GetInstance().Print_Message("How Are You");
+                });
 
             #endregion
 
             #region Factory Pattern
-            
+
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Factory Pattern ###");
@@ -103,9 +113,19 @@ namespace DesignPatterns
 
             Console.WriteLine("### Proxy Pattern ###");
 
+            var sendSmsProxy = new Proxy();
 
+            Console.WriteLine(sendSmsProxy.SendSms(1, "01054544", "Iam User 1"));
+            Console.WriteLine(sendSmsProxy.SendSms(2, "012454544", "Iam User 2"));
+            Console.WriteLine(sendSmsProxy.SendSms(3, "01015454", "Iam User 3"));
 
             #endregion
+
+
+
+
+
+
 
             Console.WriteLine("==============================================================================");
 
@@ -115,26 +135,5 @@ namespace DesignPatterns
 
             Console.ReadKey();
         }
-
-        #region Creational Design Patterns
-
-        #region Singleton
-
-        static void Get_Singleton_1()
-        {
-            var singletonInstance1 = Singleton.GetInstance();
-            singletonInstance1.Print_Message("Hello World");
-        }
-
-        static void Get_Singleton_2()
-        {
-            var singletonInstance2 = Singleton.GetInstance();
-            singletonInstance2.Print_Message("How Are You");
-        }
-
-
-        #endregion
-
-        #endregion
     }
 }
