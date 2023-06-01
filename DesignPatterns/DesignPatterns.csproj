@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="C_Behavior Patterns\" />
-    <Folder Include="B_Structure Patterns\" />
   </ItemGroup>
 
 </Project>

@@ -121,7 +121,20 @@ namespace DesignPatterns
 
             #endregion
 
+            #region Decorator Pattern
+            Console.WriteLine("--------------------------------------------------------------");
 
+            Console.WriteLine("### Decorator Pattern ###");
+
+            //Used To Add Functionality to another class without edit it
+
+            var smsService = new ConcreteSmsService();
+            var emailDecorator = new SendSmsWithEmailDecorator("maxbayne@gmail.com");
+
+            emailDecorator.SetService(smsService);
+            Console.WriteLine(emailDecorator.SendSms(1, "01051545847", "Hello Decorator"));
+
+            #endregion
 
 
 
