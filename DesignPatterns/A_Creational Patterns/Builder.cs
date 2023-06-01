@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#pragma warning disable CS8618
 
 namespace DesignPatterns.A_Creational_Patterns
 {
-    public class Builder
+    public interface IBuilder
+    {
+        IRobot GetRobot();
+
+        IRobot BuildRobot();
+
+    }
+
+    public class Builder: IBuilder
     {
         private IRobot _robot;
 
@@ -15,12 +19,12 @@ namespace DesignPatterns.A_Creational_Patterns
             _robot = robot;
         }
 
-        public IRobot getRobot()
+        public IRobot GetRobot()
         {
             return _robot;
         }
 
-        public IRobot buildRobot()
+        public IRobot BuildRobot()
         {
             _robot.Head = "This is Head Of Robot";
             _robot.Arms = "This is Arms of Robot";

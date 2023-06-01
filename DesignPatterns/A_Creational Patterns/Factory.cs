@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿#pragma warning disable CS8618
 namespace DesignPatterns.A_Creational_Patterns
 {
-    public static class Factory
+    public interface IFactory
     {
-        public static Car getCar(string type) 
+        ICar CreateCar(string type);
+    }
+
+    public class Factory: IFactory
+    {
+        public ICar CreateCar(string type) 
         {
             switch (type)
             {
@@ -16,7 +16,7 @@ namespace DesignPatterns.A_Creational_Patterns
                     return new SedanCar();
 
                 case "U":
-                    return new SubUVCar();
+                    return new SubUvCar();
 
                 case "T":
                     return new TruckCar();
@@ -31,14 +31,14 @@ namespace DesignPatterns.A_Creational_Patterns
     {
         string Name { get; set; }
 
-        void printName();
+        void PrintName();
     }
 
     public abstract class Car : ICar
     {
         public string Name { get; set; }
 
-        public void printName()
+        public void PrintName()
         {
             Console.WriteLine(Name);
         }
@@ -53,9 +53,9 @@ namespace DesignPatterns.A_Creational_Patterns
         }
     }
 
-    public class SubUVCar : Car
+    public class SubUvCar : Car
     {
-        public SubUVCar()
+        public SubUvCar()
         {
             Name = "SubUV";
         }

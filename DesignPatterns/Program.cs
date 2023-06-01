@@ -7,9 +7,11 @@ namespace DesignPatterns
         static void Main()
         {
             Console.WriteLine("Creational Design Pattern");
-            Console.WriteLine("==========================");
+            Console.WriteLine("==============================================================================");
 
+            #region Singleton Pattern
             Console.WriteLine("--------------------------------------------------------------");
+
             Console.WriteLine("### Singleton Pattern ###");
 
 
@@ -22,37 +24,90 @@ namespace DesignPatterns
             Console.WriteLine("\n(From Multi Thread)");
             Parallel.Invoke(Get_Singleton_1, Get_Singleton_2);
 
+            #endregion
 
+            #region Factory Pattern
+            
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Factory Pattern ###");
 
-            var sedan = Factory.getCar("S");
-            sedan.printName();
+            var factory = new Factory();
 
-            var subuv = Factory.getCar("U");
-            subuv.printName();
+            var sedan = factory.CreateCar("S");
+            sedan.PrintName();
 
-            var truck = Factory.getCar("T");
-            truck.printName();
+            var subuv = factory.CreateCar("U");
+            subuv.PrintName();
 
+            var truck = factory.CreateCar("T");
+            truck.PrintName();
+
+            #endregion
+
+            #region Builder Pattern
+            
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Builder Pattern ###");
 
             var robotBuilder = new Builder(new Robot());
-            var builtedRobot = robotBuilder.buildRobot();
+            var builtedRobot = robotBuilder.BuildRobot();
             
             builtedRobot.PrintInfo();
 
+            #endregion
+
+            #region Prototype Pattern
+            
             Console.WriteLine("--------------------------------------------------------------");
 
+            Console.WriteLine("### Prototype Pattern ###");
+
+            var emp1 = new RegularEmployee();
+            var shallowCopy = emp1.ShallowCopy();
+            var deepCopy = emp1.DeepCopy();
+
+            Console.WriteLine($"emp1 (Original) => {emp1}");
+            Console.WriteLine($"emp1 (shallow)  => {shallowCopy} \n");
+            Console.WriteLine("Try Change shallow Copy by change Name to Ahmed and Address to Giza , On Original Value Types Not Effected (Id,Name),Reference Types (Address) Will Effected because its reference");
+
+            shallowCopy.Name = "Ahmed";
+            shallowCopy.Address.Street = "Giza";
+
+            Console.WriteLine($"emp1 (Original) => {emp1}");
+            Console.WriteLine($"emp1 (shallow)  => {shallowCopy} \n");
+
+            Console.WriteLine($"emp1 (Original) => {emp1}");
+            Console.WriteLine($"emp1 (Deep)  => {deepCopy} \n");
+
+            Console.WriteLine("Try Change Deep Copy by change Name to Khalid And Address to Benha,On Original Value Types Not Effected (Id,Name),Reference Types (Address) Not Effected");
+            deepCopy.Name = "Kalid";
+            deepCopy.Address.Street = "Benha";
+
+            Console.WriteLine($"emp1 (Original) => {emp1}");
+            Console.WriteLine($"emp1 (Deep)  => {deepCopy}");
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            #endregion
+
+            Console.WriteLine("==============================================================================");
+
+
+            Console.WriteLine("Structure Design Pattern");
+            Console.WriteLine("==============================================================================");
+
+            #region Proxy Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Proxy Pattern ###");
 
 
 
+            #endregion
 
-
-
+            Console.WriteLine("==============================================================================");
 
 
 
