@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="C_Behavior Patterns\" />
+    <Folder Include="C_Behavioral Patterns\" />
   </ItemGroup>
 
 </Project>

@@ -27,14 +27,18 @@ public sealed class Singleton
 
     #region Creational Pattern Singleton
 
-    public static Singleton GetInstance()
+    public static Singleton Instance
     {
-        //For First time only Create new Instance From this Class and save it inside static private variable
-        if (_instance==null)
+        get
         {
-            _instance = new Lazy<Singleton>(() => new Singleton());
+
+            //For First time only Create new Instance From this Class and save it inside static private variable
+            if (_instance == null)
+            {
+                _instance = new Lazy<Singleton>(() => new Singleton());
+            }
+            return _instance.Value;
         }
-        return _instance.Value;
     }
 
     #endregion
