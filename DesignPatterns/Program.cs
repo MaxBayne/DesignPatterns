@@ -136,9 +136,43 @@ namespace DesignPatterns
 
             #endregion
 
+            #region Adapter Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Adapter Pattern ###");
+
+            //Used as Converter from type to another
+
+            //We Have SalaryCalculator to calc salary for Employee only and need to calc salary for supervisor
+
+            var employee = new B_Structure_Patterns.Employee("ahmed",2000);
+            var supervisor = new B_Structure_Patterns.Supervisor("mohammed", 1000);
+
+            var adapter = new SalaryCalculatorAdapter();
+
+            Console.WriteLine(adapter.Calculate_Salary(employee));
+            Console.WriteLine(adapter.Calculate_Salary(supervisor));
 
 
+            #endregion
 
+            #region Facade Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Facade Pattern ###");
+
+            //Used To Collect Multi Steps inside one step
+
+            var shoppingCart = new ShoppingCart();
+            var facadeSaleOrder = new FacadeSaleOrder();
+
+            shoppingCart.Items.Add(new CartItem { ItemId=1,ItemName="Item1",UnitPrice=150,Quantity=3 });
+            shoppingCart.Items.Add(new CartItem { ItemId = 2, ItemName = "Item2", UnitPrice = 120.5, Quantity = 2 });
+            shoppingCart.Items.Add(new CartItem { ItemId = 3, ItemName = "Item3", UnitPrice = 84.2, Quantity = 3 });
+
+            facadeSaleOrder.CreateOrder(shoppingCart);
+
+            #endregion
 
             Console.WriteLine("==============================================================================");
 
