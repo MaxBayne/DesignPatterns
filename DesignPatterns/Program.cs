@@ -176,25 +176,7 @@ namespace DesignPatterns
 
 
 
-            Console.WriteLine("==============================================================================");
 
-
-            Console.WriteLine("Structure Design Pattern");
-            Console.WriteLine("==============================================================================");
-
-            #region Chain Of Responsibility Pattern
-
-            Console.WriteLine("--------------------------------------------------------------");
-             
-            Console.WriteLine("### Chain Of Responsibility Pattern ###");
-
-            //var sendSmsProxy = new Proxy();
-
-            //Console.WriteLine(sendSmsProxy.SendSms(1, "01054544", "Iam User 1"));
-            //Console.WriteLine(sendSmsProxy.SendSms(2, "012454544", "Iam User 2"));
-            //Console.WriteLine(sendSmsProxy.SendSms(3, "01015454", "Iam User 3"));
-
-            #endregion
 
             Console.WriteLine("==============================================================================");
 
