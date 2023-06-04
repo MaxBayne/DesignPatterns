@@ -146,7 +146,7 @@ namespace DesignPatterns
             //We Have SalaryCalculator to calc salary for Employee only and need to calc salary for supervisor
 
             var employee = new B_Structure_Patterns.Employee("ahmed",2000);
-            var supervisor = new B_Structure_Patterns.Supervisor("mohammed", 1000);
+            var supervisor = new Supervisor("mohammed", 1000);
 
             var adapter = new SalaryCalculatorAdapter();
 
@@ -174,7 +174,29 @@ namespace DesignPatterns
 
             #endregion
 
+            #region Composite Pattern
+            Console.WriteLine("--------------------------------------------------------------");
 
+            Console.WriteLine("### Composite Pattern ###");
+
+            //Employees
+            Composite.IEmployee ahmed=new Composite.Employee("Ahmed");
+            Composite.IEmployee khalid = new Composite.Employee("Khalid");
+            Composite.IEmployee mostafe = new Composite.Employee("Mostafa");
+            Composite.IEmployee maxBayne = new Composite.Employee("MaxBayne");
+
+            //Managers
+            Composite.IEmployee mainManager = new Composite.Manager("MainManager",new(){ahmed,khalid});
+            Composite.IEmployee branchManager = new Composite.Manager("BranchManager", new() { maxBayne, mostafe,ahmed });
+
+
+            ahmed.GetDetails();
+
+            mainManager.GetDetails();
+
+            branchManager.GetDetails();
+
+            #endregion
 
 
 
