@@ -61,15 +61,34 @@ namespace DesignPatterns
 
             Console.WriteLine("### Builder Pattern ###");
 
-            var robotBuilder = new Builder(new Robot());
-            var builtedRobot = robotBuilder.BuildRobot();
+
+            Console.WriteLine("\n Build Full Robot");
+            Console.WriteLine("----------------");
+
+            var fullRobot = new RobotBuilder(new Robot())
+                            .SetHead("Head of Robot")
+                            .SetArms("Arms of Robot")
+                            .SetLegs("Legs of Robot")
+                            .Build();
+
             
-            builtedRobot.PrintInfo();
+            fullRobot.PrintInfo();
+
+
+            Console.WriteLine("\nBuild Limited Robot");
+            Console.WriteLine("---------------------");
+            var limitedRobot = new RobotBuilder(new Robot())
+                                    .SetHead("Head of Robot")
+                                    .SetLegs("Legs of Robot")
+                                    .Build();
+            
+            
+            limitedRobot.PrintInfo();
 
             #endregion
 
             #region Prototype Pattern
-            
+
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Prototype Pattern ###");
@@ -198,7 +217,14 @@ namespace DesignPatterns
 
             #endregion
 
+            #region FlyWeight Pattern
+            Console.WriteLine("--------------------------------------------------------------");
 
+            Console.WriteLine("### FlyWeight Pattern ###");
+
+            
+
+            #endregion
 
             Console.WriteLine("==============================================================================");
 

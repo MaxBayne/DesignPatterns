@@ -25,13 +25,12 @@ public sealed class Singleton
 
     #endregion
 
-    #region Creational Pattern Singleton
+    #region Singleton Static Instance
 
     public static Singleton Instance
     {
         get
         {
-
             //For First time only Create new Instance From this Class and save it inside static private variable
             if (_instance == null)
             {

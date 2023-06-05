@@ -2,37 +2,6 @@
 
 namespace DesignPatterns.A_Creational_Patterns
 {
-    public interface IBuilder
-    {
-        IRobot GetRobot();
-
-        IRobot BuildRobot();
-
-    }
-
-    public class Builder: IBuilder
-    {
-        private IRobot _robot;
-
-        public Builder(IRobot robot)
-        {
-            _robot = robot;
-        }
-
-        public IRobot GetRobot()
-        {
-            return _robot;
-        }
-
-        public IRobot BuildRobot()
-        {
-            _robot.Head = "This is Head Of Robot";
-            _robot.Arms = "This is Arms of Robot";
-            _robot.Legs = "This is Legs of Robot";
-
-            return _robot;
-        }
-    }
 
     public interface IRobot
     {
@@ -57,5 +26,49 @@ namespace DesignPatterns.A_Creational_Patterns
         }
     }
 
+
+
+    public interface IRobotBuilder
+    {
+        IRobot Build();
+    }
+
+    public class RobotBuilder: IRobotBuilder
+    {
+        private IRobot _robot;
+
+        public RobotBuilder(IRobot robot)
+        {
+            _robot = robot;
+        }
+
+
+        public RobotBuilder SetHead(string head)
+        {
+            _robot.Head = head;
+            return this;
+        }
+
+        public RobotBuilder SetArms(string arms)
+        {
+            _robot.Arms = arms;
+            return this;
+        }
+
+        public RobotBuilder SetLegs(string legs)
+        {
+            _robot.Legs=legs;
+            return this;
+        }
+
+
+        public IRobot Build()
+        {
+            //Make Any Validation
+
+            //Return Robot
+            return _robot;
+        }
+    }
 
 }
