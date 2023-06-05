@@ -15,6 +15,11 @@ namespace DesignPatterns
 
             Console.WriteLine("### Singleton Pattern ###");
 
+            /*
+             *  Create One Instance From Object and Create it on first Request it only and every request will get created static instance
+             *  All Constructor must be private the only way to create instance from this class is over by GetInstance()
+             *  Class Must be Sealed mean not inheritable
+             */
 
             //For Single Thread ----------------
             Console.WriteLine("\n(From Single Thread)");
@@ -42,6 +47,10 @@ namespace DesignPatterns
 
             Console.WriteLine("### Factory Pattern ###");
 
+            /*
+             * Make Factory Class To Create Any Children Classes Depend on Some Parameters
+             */
+
             var factory = new Factory();
 
             var sedan = factory.CreateCar("S");
@@ -61,6 +70,9 @@ namespace DesignPatterns
 
             Console.WriteLine("### Builder Pattern ###");
 
+            /*
+             *  Create Object that Depend on Multi Objects Like Invoice with Header and Details and Footer info
+             */
 
             Console.WriteLine("\n Build Full Robot");
             Console.WriteLine("----------------");
@@ -92,6 +104,10 @@ namespace DesignPatterns
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Prototype Pattern ###");
+
+            /*
+             *  Clone Object from object with shallow or Deep Copy
+             */
 
             var emp1 = new RegularEmployee();
             var shallowCopy = emp1.ShallowCopy();
@@ -132,7 +148,9 @@ namespace DesignPatterns
 
             Console.WriteLine("### Adapter Pattern ###");
 
-            //Used as Converter from type to another
+            /*
+             * Used as Converter from type to another or make wrapper from old class to adapte it to work as new class
+             */
 
             //We Have SalaryCalculator to calc salary for Employee only and need to calc salary for supervisor
 
@@ -147,10 +165,92 @@ namespace DesignPatterns
 
             #endregion
 
+            #region Facade Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Facade Pattern ###");
+
+            /*
+             * Used To Collect Multi Steps inside one step called (Facade)
+             */
+
+            var shoppingCart = new ShoppingCart();
+            var facadeSaleOrder = new FacadeSaleOrder();
+
+            shoppingCart.Items.Add(new CartItem { ItemId = 1, ItemName = "Item1", UnitPrice = 150, Quantity = 3 });
+            shoppingCart.Items.Add(new CartItem { ItemId = 2, ItemName = "Item2", UnitPrice = 120.5, Quantity = 2 });
+            shoppingCart.Items.Add(new CartItem { ItemId = 3, ItemName = "Item3", UnitPrice = 84.2, Quantity = 3 });
+
+            facadeSaleOrder.CreateOrder(shoppingCart);
+
+            #endregion
+
+            #region Decorator Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Decorator Pattern ###");
+
+            /*
+             * Used To Add Functionality to another class without edit it
+             */
+
+            var smsService = new ConcreteSmsService();
+            var emailDecorator = new SendSmsWithEmailDecorator("maxbayne@gmail.com");
+
+            emailDecorator.SetService(smsService);
+            Console.WriteLine(emailDecorator.SendSms(1, "01051545847", "Hello Decorator"));
+
+            #endregion
+
+            #region Proxy Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Proxy Pattern ###");
+
+            /*
+             * Make Access To Class over Proxy for security or filteration or caching and so on
+             */
+
+            var sendSmsProxy = new Proxy();
+
+            Console.WriteLine(sendSmsProxy.SendSms(1, "01054544", "Iam User 1"));
+            Console.WriteLine(sendSmsProxy.SendSms(2, "012454544", "Iam User 2"));
+            Console.WriteLine(sendSmsProxy.SendSms(3, "01015454", "Iam User 3"));
+
+            #endregion
+
+            #region FlyWeight Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### FlyWeight Pattern ###");
+
+            /*
+             *  reuse cached objects and reuse it again without reCreating new instances , used dictionary as store inside memory
+             *  we can use factory pattern with it
+             */
+
+            var player1 = FlyWeight.CreatePlayer("blue");
+
+            player1.Name = "Ahmed";
+            player1.Mission = "Kill Enemey";
+            player1.Weapon = "AK47";
+            player1.PrintInfo();
+            
+            var player2= FlyWeight.CreatePlayer("blue");
+            player2.Mission = "Capture the Flag";
+            player2.Weapon = "M4";
+            player2.PrintInfo();
+
+            #endregion
+
             #region Composite Pattern
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Composite Pattern ###");
+
+            /*
+             *  Make Tree of Objects
+             */
 
             //Employees
             Composite.IEmployee ahmed = new Composite.Employee("Ahmed");
@@ -171,46 +271,6 @@ namespace DesignPatterns
 
             #endregion
 
-            #region Proxy Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### Proxy Pattern ###");
-
-            var sendSmsProxy = new Proxy();
-
-            Console.WriteLine(sendSmsProxy.SendSms(1, "01054544", "Iam User 1"));
-            Console.WriteLine(sendSmsProxy.SendSms(2, "012454544", "Iam User 2"));
-            Console.WriteLine(sendSmsProxy.SendSms(3, "01015454", "Iam User 3"));
-
-            #endregion
-
-            #region FlyWeight Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### FlyWeight Pattern ###");
-
-
-
-            #endregion
-
-            #region Facade Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### Facade Pattern ###");
-
-            //Used To Collect Multi Steps inside one step
-
-            var shoppingCart = new ShoppingCart();
-            var facadeSaleOrder = new FacadeSaleOrder();
-
-            shoppingCart.Items.Add(new CartItem { ItemId = 1, ItemName = "Item1", UnitPrice = 150, Quantity = 3 });
-            shoppingCart.Items.Add(new CartItem { ItemId = 2, ItemName = "Item2", UnitPrice = 120.5, Quantity = 2 });
-            shoppingCart.Items.Add(new CartItem { ItemId = 3, ItemName = "Item3", UnitPrice = 84.2, Quantity = 3 });
-
-            facadeSaleOrder.CreateOrder(shoppingCart);
-
-            #endregion
-
             #region Bridge Pattern
             Console.WriteLine("--------------------------------------------------------------");
 
@@ -220,20 +280,7 @@ namespace DesignPatterns
 
             #endregion
 
-            #region Decorator Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### Decorator Pattern ###");
-
-            //Used To Add Functionality to another class without edit it
-
-            var smsService = new ConcreteSmsService();
-            var emailDecorator = new SendSmsWithEmailDecorator("maxbayne@gmail.com");
-
-            emailDecorator.SetService(smsService);
-            Console.WriteLine(emailDecorator.SendSms(1, "01051545847", "Hello Decorator"));
-
-            #endregion
+            
 
             Console.WriteLine("==============================================================================");
 
