@@ -61,15 +61,34 @@ namespace DesignPatterns
 
             Console.WriteLine("### Builder Pattern ###");
 
-            var robotBuilder = new Builder(new Robot());
-            var builtedRobot = robotBuilder.BuildRobot();
+
+            Console.WriteLine("\n Build Full Robot");
+            Console.WriteLine("----------------");
+
+            var fullRobot = new RobotBuilder(new Robot())
+                            .SetHead("Head of Robot")
+                            .SetArms("Arms of Robot")
+                            .SetLegs("Legs of Robot")
+                            .Build();
+
             
-            builtedRobot.PrintInfo();
+            fullRobot.PrintInfo();
+
+
+            Console.WriteLine("\nBuild Limited Robot");
+            Console.WriteLine("---------------------");
+            var limitedRobot = new RobotBuilder(new Robot())
+                                    .SetHead("Head of Robot")
+                                    .SetLegs("Legs of Robot")
+                                    .Build();
+            
+            
+            limitedRobot.PrintInfo();
 
             #endregion
 
             #region Prototype Pattern
-            
+
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Prototype Pattern ###");
@@ -108,6 +127,50 @@ namespace DesignPatterns
             Console.WriteLine("Structure Design Pattern");
             Console.WriteLine("==============================================================================");
 
+            #region Adapter Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Adapter Pattern ###");
+
+            //Used as Converter from type to another
+
+            //We Have SalaryCalculator to calc salary for Employee only and need to calc salary for supervisor
+
+            var employee = new B_Structure_Patterns.Employee("ahmed", 2000);
+            var supervisor = new Supervisor("mohammed", 1000);
+
+            var adapter = new SalaryCalculatorAdapter();
+
+            Console.WriteLine(adapter.Calculate_Salary(employee));
+            Console.WriteLine(adapter.Calculate_Salary(supervisor));
+
+
+            #endregion
+
+            #region Composite Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Composite Pattern ###");
+
+            //Employees
+            Composite.IEmployee ahmed = new Composite.Employee("Ahmed");
+            Composite.IEmployee khalid = new Composite.Employee("Khalid");
+            Composite.IEmployee mostafe = new Composite.Employee("Mostafa");
+            Composite.IEmployee maxBayne = new Composite.Employee("MaxBayne");
+
+            //Managers
+            Composite.IEmployee mainManager = new Composite.Manager("MainManager", new() { ahmed, khalid });
+            Composite.IEmployee branchManager = new Composite.Manager("BranchManager", new() { maxBayne, mostafe, ahmed });
+
+
+            ahmed.GetDetails();
+
+            mainManager.GetDetails();
+
+            branchManager.GetDetails();
+
+            #endregion
+
             #region Proxy Pattern
             Console.WriteLine("--------------------------------------------------------------");
 
@@ -118,6 +181,42 @@ namespace DesignPatterns
             Console.WriteLine(sendSmsProxy.SendSms(1, "01054544", "Iam User 1"));
             Console.WriteLine(sendSmsProxy.SendSms(2, "012454544", "Iam User 2"));
             Console.WriteLine(sendSmsProxy.SendSms(3, "01015454", "Iam User 3"));
+
+            #endregion
+
+            #region FlyWeight Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### FlyWeight Pattern ###");
+
+
+
+            #endregion
+
+            #region Facade Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Facade Pattern ###");
+
+            //Used To Collect Multi Steps inside one step
+
+            var shoppingCart = new ShoppingCart();
+            var facadeSaleOrder = new FacadeSaleOrder();
+
+            shoppingCart.Items.Add(new CartItem { ItemId = 1, ItemName = "Item1", UnitPrice = 150, Quantity = 3 });
+            shoppingCart.Items.Add(new CartItem { ItemId = 2, ItemName = "Item2", UnitPrice = 120.5, Quantity = 2 });
+            shoppingCart.Items.Add(new CartItem { ItemId = 3, ItemName = "Item3", UnitPrice = 84.2, Quantity = 3 });
+
+            facadeSaleOrder.CreateOrder(shoppingCart);
+
+            #endregion
+
+            #region Bridge Pattern
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Bridge Pattern ###");
+
+
 
             #endregion
 
@@ -135,70 +234,6 @@ namespace DesignPatterns
             Console.WriteLine(emailDecorator.SendSms(1, "01051545847", "Hello Decorator"));
 
             #endregion
-
-            #region Adapter Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### Adapter Pattern ###");
-
-            //Used as Converter from type to another
-
-            //We Have SalaryCalculator to calc salary for Employee only and need to calc salary for supervisor
-
-            var employee = new B_Structure_Patterns.Employee("ahmed",2000);
-            var supervisor = new Supervisor("mohammed", 1000);
-
-            var adapter = new SalaryCalculatorAdapter();
-
-            Console.WriteLine(adapter.Calculate_Salary(employee));
-            Console.WriteLine(adapter.Calculate_Salary(supervisor));
-
-
-            #endregion
-
-            #region Facade Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### Facade Pattern ###");
-
-            //Used To Collect Multi Steps inside one step
-
-            var shoppingCart = new ShoppingCart();
-            var facadeSaleOrder = new FacadeSaleOrder();
-
-            shoppingCart.Items.Add(new CartItem { ItemId=1,ItemName="Item1",UnitPrice=150,Quantity=3 });
-            shoppingCart.Items.Add(new CartItem { ItemId = 2, ItemName = "Item2", UnitPrice = 120.5, Quantity = 2 });
-            shoppingCart.Items.Add(new CartItem { ItemId = 3, ItemName = "Item3", UnitPrice = 84.2, Quantity = 3 });
-
-            facadeSaleOrder.CreateOrder(shoppingCart);
-
-            #endregion
-
-            #region Composite Pattern
-            Console.WriteLine("--------------------------------------------------------------");
-
-            Console.WriteLine("### Composite Pattern ###");
-
-            //Employees
-            Composite.IEmployee ahmed=new Composite.Employee("Ahmed");
-            Composite.IEmployee khalid = new Composite.Employee("Khalid");
-            Composite.IEmployee mostafe = new Composite.Employee("Mostafa");
-            Composite.IEmployee maxBayne = new Composite.Employee("MaxBayne");
-
-            //Managers
-            Composite.IEmployee mainManager = new Composite.Manager("MainManager",new(){ahmed,khalid});
-            Composite.IEmployee branchManager = new Composite.Manager("BranchManager", new() { maxBayne, mostafe,ahmed });
-
-
-            ahmed.GetDetails();
-
-            mainManager.GetDetails();
-
-            branchManager.GetDetails();
-
-            #endregion
-
-
 
             Console.WriteLine("==============================================================================");
 
