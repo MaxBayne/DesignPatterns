@@ -276,11 +276,21 @@ namespace DesignPatterns
 
             Console.WriteLine("### Bridge Pattern ###");
 
+            /*
+             * Make Bridge Between Two Big Classes like (OperatingSystem <> Control) and if we modify any class not affect the other
+             */
 
+            var windows = new Windows();
+            var button = new Button(windows);
+
+            button.Click();
+
+            button.OperatingSystem=new Linux();
+            button.Click();
 
             #endregion
 
-            
+
 
             Console.WriteLine("==============================================================================");
 
