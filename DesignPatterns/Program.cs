@@ -1,5 +1,6 @@
 ﻿using DesignPatterns.A_Creational_Patterns;
 using DesignPatterns.B_Structure_Patterns;
+using DesignPatterns.C_Behavioral_Patterns;
 
 namespace DesignPatterns
 {
@@ -290,13 +291,179 @@ namespace DesignPatterns
 
             #endregion
 
-
-
             Console.WriteLine("==============================================================================");
 
+            Console.WriteLine("Behavioral Design Pattern");
+            Console.WriteLine("==============================================================================");
+
+            #region Chain Of Responsibility Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Chain Of Responsibility Pattern ###");
+
+            /*
+             * Send Request To Multi Handlers inside Chain and Each Handel Process Request if he can do it then will send Response other wise push it to the next handler inside the chain
+            */
+
+            //Create Handels
+            var ceo = new Ceo("ceo mohammed");
+            var vp = new Vp("vp mostafa", ceo);
+            var director = new Director("Ahmed Director", vp);
+
+            //Create Requests
+            var conferenceRequest = new Request(RequestType.Conference, 0);
+            var purchaseRequest = new Request(RequestType.Purchase, 1200);
+            var purchaseHighRequest = new Request(RequestType.Purchase, 2500);
+
+            //Path Request To Chain of Handelers
+            director.HandelRequest(conferenceRequest);
+            vp.HandelRequest(purchaseRequest);
+            vp.HandelRequest(purchaseHighRequest);
+
+            #endregion
+
+            #region Observer Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Observer Pattern ###");
+
+            /*
+             * 
+             */
 
 
 
+            #endregion
+
+            #region Command Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Command Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Interpreter Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Interpreter Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Iterator Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Iterator Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Mediator Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Mediator Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Memento Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Memento Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region State Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### State Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Strategy Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Strategy Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Template Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Template Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            #region Visitor Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Visitor Pattern ###");
+
+            /*
+             * 
+             */
+
+
+
+            #endregion
+
+            Console.WriteLine("==============================================================================");
 
             Console.ReadKey();
         }
