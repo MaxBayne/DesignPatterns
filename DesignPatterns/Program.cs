@@ -330,10 +330,20 @@ namespace DesignPatterns
             Console.WriteLine("### Observer Pattern ###");
 
             /*
-             * 
+             * Observer act as subscriber for subject when subject updated then subject responsible to notify any subscripers on it
              */
 
+            var subscriber1 = new Subscriber("ahmed");
+            var subscriber2 = new Subscriber("khalid");
+            var subscriber3 = new Subscriber("ali");
 
+            var subject = new Subject("Newspaper");
+            
+            subject.Attach(subscriber1);
+            subject.Attach(subscriber2);
+            subject.Attach(subscriber3);
+
+            subject.DoSomeLogic();
 
             #endregion
 
@@ -466,6 +476,7 @@ namespace DesignPatterns
             Console.WriteLine("==============================================================================");
 
             Console.ReadKey();
+
         }
     }
 }
