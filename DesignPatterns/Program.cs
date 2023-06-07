@@ -354,11 +354,21 @@ namespace DesignPatterns
             Console.WriteLine("### Command Pattern ###");
 
             /*
-             * 
+             * Execute Command By Invoker From Sender to Receiver 
              */
 
 
+            IInvoker invoker = new Invoker("osama");
 
+            IReceiver receiverAhmed = new Receiver("ahmed");
+            IReceiver receiverKhalid = new Receiver("kalid");
+            IReceiver receiverMona = new Receiver("Mona");
+
+            ICommand sendMoneyCmd = new SendMoneyToSingleCommand(receiverAhmed);
+            ICommand sendMoneyCmd2 = new SendMoneyToSingleCommand(receiverKhalid);
+
+            invoker.Invoke(sendMoneyCmd);
+            invoker.Invoke(sendMoneyCmd2);
             #endregion
 
             #region Interpreter Pattern

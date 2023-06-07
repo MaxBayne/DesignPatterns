@@ -88,7 +88,7 @@ public class Subject : BaseSubject
     public override void DoSomeLogic()
     {
         Console.WriteLine("Subject Make Some Jobs");
-        Thread.Sleep(5000);
+        Thread.Sleep(1000);
         Notify();
     }
 }
