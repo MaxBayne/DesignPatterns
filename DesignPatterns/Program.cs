@@ -378,9 +378,10 @@ namespace DesignPatterns
             Console.WriteLine("### Interpreter Pattern ###");
 
             /*
-             * 
+             * Make Rules used to interpret some context from language to another
              */
 
+            
 
 
             #endregion
