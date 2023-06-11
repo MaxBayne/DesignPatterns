@@ -381,8 +381,17 @@ namespace DesignPatterns
              * Make Rules used to interpret some context from language to another
              */
 
-            
+            IExpression isMale = Interpreter.GetMaleExpressions();
+            IExpression isFemale = Interpreter.GetFeMaleExpressions();
+            IExpression isDoctor = Interpreter.GetDoctorExpressions();
+            IExpression isTeacher = Interpreter.GetTeacherExpressions();
 
+
+            Console.WriteLine($"ahmed is male ? {isMale.Interpret(new Context("ahmed"))}");
+            Console.WriteLine($"mona is female ? {isFemale.Interpret(new Context("mona"))}");
+            Console.WriteLine($"khalid is female ? {isFemale.Interpret(new Context("khalid"))}");
+            Console.WriteLine($"ahmed is teacher ? {isTeacher.Interpret(new Context("teacher ahmed"))}");
+            Console.WriteLine($"ahmed is doctor ? {isDoctor.Interpret(new Context("doctor ahmed"))}");
 
             #endregion
 
