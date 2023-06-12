@@ -362,7 +362,6 @@ namespace DesignPatterns
 
             IReceiver receiverAhmed = new Receiver("ahmed");
             IReceiver receiverKhalid = new Receiver("kalid");
-            IReceiver receiverMona = new Receiver("Mona");
 
             ICommand sendMoneyCmd = new SendMoneyToSingleCommand(receiverAhmed);
             ICommand sendMoneyCmd2 = new SendMoneyToSingleCommand(receiverKhalid);
@@ -458,9 +457,33 @@ namespace DesignPatterns
             Console.WriteLine("### Memento Pattern ###");
 
             /*
-             * 
+             * Just store multi states inside list and can undo to go to this state like checkpoints in games  
              */
 
+            var player = new Player("ahmed",25);
+
+            //save memento state inside manager
+            var manager = new Manager();
+            manager.PushMemento(player.CreateMemento());
+
+            Console.WriteLine("Initial state for Player");
+            Console.WriteLine(player.ToString());
+
+            //Change State of player and store it inside manager
+            player.Name = "Khalid";
+            player.Age = 35;
+            manager.PushMemento(player.CreateMemento());
+
+            Console.WriteLine("Change state for Player");
+            Console.WriteLine(player.ToString());
+
+            //Undo changes over player and restore previous state
+            manager.PopMemento();
+            player.UndoMemento(manager.PopMemento());
+
+
+            Console.WriteLine("Undo Changes of state for Player");
+            Console.WriteLine(player.ToString());
 
 
             #endregion
