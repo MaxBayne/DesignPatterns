@@ -1,6 +1,8 @@
-﻿using DesignPatterns.A_Creational_Patterns;
+﻿using System.Numerics;
+using DesignPatterns.A_Creational_Patterns;
 using DesignPatterns.B_Structure_Patterns;
 using DesignPatterns.C_Behavioral_Patterns;
+using Action = DesignPatterns.C_Behavioral_Patterns.Action;
 
 namespace DesignPatterns
 {
@@ -493,12 +495,20 @@ namespace DesignPatterns
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### State Pattern ###");
-
             /*
-             * 
-             */
+            * Make State Machine from object and save this state inside it
+            */
 
+            var vehicle = new Vehicle();
 
+            Console.WriteLine(vehicle.ToString());
+
+            vehicle.ChangeState(Action.Start);
+            Console.WriteLine(vehicle.ToString());
+            vehicle.ChangeState(Action.Accelerate);
+            Console.WriteLine(vehicle.ToString());
+            vehicle.ChangeState(Action.Stop);
+            Console.WriteLine(vehicle.ToString());
 
             #endregion
 
