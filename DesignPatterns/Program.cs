@@ -402,10 +402,24 @@ namespace DesignPatterns
             Console.WriteLine("### Iterator Pattern ###");
 
             /*
-             * 
+             * Access element inside collection without dive inside the implementation or the type of collection or list
              */
 
+            //list of collection
+            var persons = new Aggregator<string>();
+            persons.Add("Ahmed");
+            persons.Add("Khalid");
+            persons.Add("Ali");
+            persons.Add("Mohammed");
+            persons.Add("Mona");
 
+            //iterate over collection elements using iterator
+            var iterator = persons.Iterator;
+
+            while (iterator.HasNext())
+            {
+                Console.WriteLine(iterator.Current);
+            }
 
             #endregion
 
