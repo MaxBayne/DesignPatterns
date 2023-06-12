@@ -430,8 +430,22 @@ namespace DesignPatterns
             Console.WriteLine("### Mediator Pattern ###");
 
             /*
-             * 
+             * make object mediator between multi objects and not coupple objects with other
              */
+
+            //multi objects
+            var cabA = new Cab(1, "CabA", "Benha");
+            var cabB = new Cab(2, "CabB", "Benha");
+            var cabC = new Cab(3, "CabC", "Benha");
+
+            //mediator
+            var cabTower = new CabTower();
+            cabTower.RegisterCab(cabA);
+            cabTower.RegisterCab(cabB);
+            cabTower.RegisterCab(cabC);
+
+            cabTower.AskHelp(cabA,"hii my tear is below :(");
+            cabTower.AskHelp(cabB, "hii my Gas is empty :(");
 
 
 
