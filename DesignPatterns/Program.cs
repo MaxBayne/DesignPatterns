@@ -519,7 +519,7 @@ namespace DesignPatterns
             Console.WriteLine("### Strategy Pattern ###");
 
             /*
-             * if we have multi algorithm family and need to select one from family to execute
+             * if we have multi algorithm family and need to select one from family to execute like sorting methods
              */
 
             var bmwStrategy=new BmwStrategy();
@@ -539,10 +539,15 @@ namespace DesignPatterns
             Console.WriteLine("### Template Pattern ###");
 
             /*
-             * 
+             * when we have shared steps and only few steps are changed then we use this pattern like pizza maker
              */
 
+            var cartByEmail = new CartByEmail();
+            var cartBySms = new CartBySms();
 
+            cartByEmail.CheckOut();
+            Console.WriteLine("----------------");
+            cartBySms.CheckOut();
 
             #endregion
 
