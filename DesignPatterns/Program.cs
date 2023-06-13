@@ -519,10 +519,16 @@ namespace DesignPatterns
             Console.WriteLine("### Strategy Pattern ###");
 
             /*
-             * 
+             * if we have multi algorithm family and need to select one from family to execute
              */
 
+            var bmwStrategy=new BmwStrategy();
+            var toyotaStrategy = new ToyotaStrategy();
 
+            var mechanic = new Mechanic();
+
+            mechanic.DisassembleCar(toyotaStrategy);
+            mechanic.DisassembleCar(bmwStrategy);
 
             #endregion
 
