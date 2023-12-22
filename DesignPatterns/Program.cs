@@ -12,6 +12,8 @@ namespace DesignPatterns
         {
             Console.WriteLine("Creational Design Pattern");
             Console.WriteLine("==============================================================================");
+            Console.WriteLine("deal with object creation and initialization");
+            Console.WriteLine("==============================================================================");
 
             #region Singleton Pattern
             Console.WriteLine("--------------------------------------------------------------");
@@ -26,21 +28,24 @@ namespace DesignPatterns
 
             //For Single Thread ----------------
             Console.WriteLine("\n(From Single Thread)");
-            Singleton.Instance.Print_Message("Hello World");
-            Singleton.Instance.Print_Message("How Are You");
+            Singleton.GetInstance.Print_Message("Hello World");
+            Singleton.GetInstance.Print_Message("How Are You");
 
-            
-            
+            LogSingleton.GetInstance.Log_Message("Log my first message please");
+            LogSingleton.GetInstance.Log_Message("Log my second message please");
+
             //For Multi Thread ----------------
             Console.WriteLine("\n(From Multi Thread)");
+
+            //Try to Execute same code on two thread each different another
             Parallel.Invoke(() =>
             {
-                Singleton.Instance.Print_Message("Hello World");
+                Singleton.GetInstance.Print_Message("Hello World");
             },
-                () =>
-                {
-                    Singleton.Instance.Print_Message("How Are You");
-                });
+            () =>
+            {
+                Singleton.GetInstance.Print_Message("How Are You");
+            });
 
             #endregion
 
@@ -54,21 +59,28 @@ namespace DesignPatterns
              * Make Factory Class To Create Any Children Classes Depend on Some Parameters
              */
 
-            var factory = new Factory();
+            var carFactory = new CarFactory();
 
-            var sedan = factory.CreateCar("S");
+            var sedan = carFactory.CreateCar("S");
             sedan.PrintName();
 
-            var subuv = factory.CreateCar("U");
+            var subuv = carFactory.CreateCar("U");
             subuv.PrintName();
 
-            var truck = factory.CreateCar("T");
+            var truck = carFactory.CreateCar("T");
             truck.PrintName();
+
+
+            var permanent = TeacherFactory.CreateTeacher(TeacherTypeEnum.Permanent);
+            var contact = TeacherFactory.CreateTeacher(TeacherTypeEnum.Contract);
+            var templorary = TeacherFactory.CreateTeacher(TeacherTypeEnum.Templorary);
+
+
 
             #endregion
 
             #region Builder Pattern
-            
+
             Console.WriteLine("--------------------------------------------------------------");
 
             Console.WriteLine("### Builder Pattern ###");
@@ -143,7 +155,9 @@ namespace DesignPatterns
             Console.WriteLine("==============================================================================");
 
 
-            Console.WriteLine("Structure Design Pattern");
+            Console.WriteLine("Structural Design Pattern");
+            Console.WriteLine("==============================================================================");
+            Console.WriteLine("deal with class and object composition");
             Console.WriteLine("==============================================================================");
 
             #region Adapter Pattern
@@ -296,6 +310,8 @@ namespace DesignPatterns
             Console.WriteLine("==============================================================================");
 
             Console.WriteLine("Behavioral Design Pattern");
+            Console.WriteLine("==============================================================================");
+            Console.WriteLine("deal with the communication between classes and objects");
             Console.WriteLine("==============================================================================");
 
             #region Chain Of Responsibility Pattern

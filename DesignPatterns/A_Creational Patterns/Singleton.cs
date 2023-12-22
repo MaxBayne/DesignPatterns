@@ -27,13 +27,14 @@ public sealed class Singleton
 
     #region Singleton Static Instance
 
-    public static Singleton Instance
+    public static Singleton GetInstance
     {
         get
         {
             //For First time only Create new Instance From this Class and save it inside static private variable
             if (_instance == null)
             {
+                //we use lazy for multi threading when try to call this signlton class on each thread
                 _instance = new Lazy<Singleton>(() => new Singleton());
             }
             return _instance.Value;
@@ -52,3 +53,55 @@ public sealed class Singleton
     #endregion
 
 }
+
+#region Log Example
+
+public interface ILogSingleton
+{
+    void Log_Message(string message);
+}
+public sealed class LogSingleton : ILogSingleton
+{
+    //Local Storage For Singleton Instance
+    private static Lazy<LogSingleton>? _instance;
+
+    #region Private Constructors
+
+    private LogSingleton()
+    {
+
+
+    }
+
+    #endregion
+
+    #region Singleton Static Instance
+
+    public static LogSingleton GetInstance
+    {
+        get
+        {
+            //For First time only Create new Instance From this Class and save it inside static private variable
+            if (_instance == null)
+            {
+                //we use lazy for multi threading when try to call this signlton class on each thread
+                _instance = new Lazy<LogSingleton>(() => new LogSingleton());
+            }
+            return _instance.Value;
+        }
+    }
+
+    #endregion
+
+    #region Methods
+
+    public void Log_Message(string message)
+    {
+        Console.WriteLine(message);
+    }
+
+    #endregion
+
+}
+
+#endregion
