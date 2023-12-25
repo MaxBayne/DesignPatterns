@@ -1,16 +1,31 @@
 ﻿#pragma warning disable CS8618
 namespace DesignPatterns.A_Creational_Patterns
 {
+    /*
+     * Factory Method
+     * - mean make the creation of some classes with same family (implement same interface or inherit same base class) from one place , if u have some classes with varient conditions for creating 
+     * this classes u can make centeral location that responsable for creatng this class and when i want to change the logic i will change 
+     * inside center location (factory)
+     * 
+     * Example :
+     * if we have bsae class or interface called invoice and some sub classess called (PurchaseInvoice-SalesInvoice etc..) and we need to make
+     * factory method used to create invoice depend on condition like type of invoice so we will use InvoiceFactory class have method called
+     * CreateInvoice(InvoiceType) and return IInvoice base class
+     */
+
     #region Car Factory
+
+    #region Factory
+
 
     public interface ICarFactory
     {
         ICar CreateCar(string type);
     }
 
-    public class CarFactory: ICarFactory
+    public class CarFactory : ICarFactory
     {
-        public ICar CreateCar(string type) 
+        public ICar CreateCar(string type)
         {
             switch (type)
             {
@@ -28,6 +43,10 @@ namespace DesignPatterns.A_Creational_Patterns
             }
         }
     }
+
+    #endregion
+
+
 
     public interface ICar
     {
@@ -75,35 +94,40 @@ namespace DesignPatterns.A_Creational_Patterns
 
     #region Employee Factory
 
+    #region Factory
+
     public class TeacherFactory
     {
         public static ITeacher? CreateTeacher(TeacherTypeEnum teacherType)
         {
             ITeacher? teacher = null;
 
-            if (teacherType == TeacherTypeEnum.Permanent) 
+            if (teacherType == TeacherTypeEnum.Permanent)
             {
                 teacher = new PermanentTeacher("ahmed");
                 teacher.PayHour = 100;
                 teacher.Bonus = 50;
             }
-            else if(teacherType == TeacherTypeEnum.Contract)
+            else if (teacherType == TeacherTypeEnum.Contract)
             {
                 teacher = new ContractTeacher("ali");
                 teacher.PayHour = 50;
                 teacher.Bonus = 40;
             }
-            else if(teacherType == TeacherTypeEnum.Templorary)
+            else if (teacherType == TeacherTypeEnum.Templorary)
             {
                 teacher = new TemploraryTeacher("mosafa");
                 teacher.PayHour = 10;
                 teacher.Bonus = 10;
             }
-           
+
 
             return teacher;
         }
     }
+
+    #endregion
+
 
     public enum TeacherTypeEnum
     {
@@ -157,6 +181,115 @@ namespace DesignPatterns.A_Creational_Patterns
         }
     }
 
+
+    #endregion
+
+    #region Invoice Factory
+
+    #region Factory
+
+  
+    public static class InvoiceFactory
+    {
+        public static IInvoice CreateInvoice(InvoiceTypeEnum invoiceType)
+        {
+            IInvoice? invoice;
+
+            switch (invoiceType)
+            {
+                case InvoiceTypeEnum.Sales:
+                    invoice = new SalesInvoice();
+                    break;
+
+                case InvoiceTypeEnum.Purchases:
+                    invoice = new PurchaseInvoice();
+                    break;
+
+                case InvoiceTypeEnum.ReturnSales:
+                    invoice = new ReturnSalesInvoice();
+                    break;
+
+                case InvoiceTypeEnum.ReturnPurchases:
+                    invoice = new ReturnPurchaseInvoice();
+                    break;
+
+                default:
+                    invoice = new SalesInvoice();
+                    break;
+            }
+
+            return invoice;
+        }
+    }
+
+    #endregion
+
+    public enum InvoiceTypeEnum
+    {
+        Sales,
+        Purchases,
+
+        ReturnSales,
+        ReturnPurchases
+    }
+
+    public interface IInvoice
+    {
+        string InvoiceNo { get; set; }
+        DateTime InvoiceDate { get; set; }
+        string InvoiceNotes { get; set; }
+
+        InvoiceTypeEnum InvoiceType { get; set; }
+    }
+
+    /// <summary>
+    /// فاتورة
+    /// </summary>
+    public abstract class BaseInvoice : IInvoice
+    {
+        public string InvoiceNo { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public string InvoiceNotes { get; set; }
+        public InvoiceTypeEnum InvoiceType { get; set; }
+    }
+
+    /// <summary>
+    /// فاتورة مشتريات
+    /// </summary>
+    public class PurchaseInvoice:BaseInvoice
+    {
+        public string SupplierName { get; set; }
+
+    }
+
+    /// <summary>
+    /// فاتورة مبيعات
+    /// </summary>
+    public class SalesInvoice : BaseInvoice
+    {
+        public string CustomerName { get; set; }
+        public decimal Discount { get; set; }
+    }
+
+    /// <summary>
+    /// فاتورة مرتجع مشتريات
+    /// </summary>
+    public class ReturnPurchaseInvoice : BaseInvoice
+    {
+        public string SupplierName { get; set; }
+        public DateTime ReturnedOn { get; set; }
+        public string ReasonOfReturn { get; set; }
+    }
+
+    /// <summary>
+    /// فاتورة مرتجع مبيعات
+    /// </summary>
+    public class ReturnSalesInvoice : BaseInvoice
+    {
+        public string CustomerName { get; set; }
+        public DateTime ReturnedOn { get; set; }
+        public string ReasonOfReturn { get; set; }
+    }
 
     #endregion
 }

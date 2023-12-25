@@ -70,12 +70,12 @@ namespace DesignPatterns
             var truck = carFactory.CreateCar("T");
             truck.PrintName();
 
-
             var permanent = TeacherFactory.CreateTeacher(TeacherTypeEnum.Permanent);
             var contact = TeacherFactory.CreateTeacher(TeacherTypeEnum.Contract);
             var templorary = TeacherFactory.CreateTeacher(TeacherTypeEnum.Templorary);
 
-
+            var salesInvoice = InvoiceFactory.CreateInvoice(InvoiceTypeEnum.Sales);
+            var purchasesInvoice = InvoiceFactory.CreateInvoice(InvoiceTypeEnum.Purchases);
 
             #endregion
 
