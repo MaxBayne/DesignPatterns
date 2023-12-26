@@ -2,7 +2,7 @@
 namespace DesignPatterns.A_Creational_Patterns
 {
     /*
-     * Factory Method
+     * Simple Factory
      * - mean make the creation of some classes with same family (implement same interface or inherit same base class) from one place , if u have some classes with varient conditions for creating 
      * this classes u can make centeral location that responsable for creatng this class and when i want to change the logic i will change 
      * inside center location (factory)
@@ -15,7 +15,7 @@ namespace DesignPatterns.A_Creational_Patterns
 
     #region Car Factory
 
-    #region Factory
+    #region Simple Factory
 
 
     public interface ICarFactory
@@ -94,9 +94,9 @@ namespace DesignPatterns.A_Creational_Patterns
 
     #region Employee Factory
 
-    #region Factory
+    #region Simple Factory
 
-    public class TeacherFactory
+    public class TeacherSimpleFactory
     {
         public static ITeacher? CreateTeacher(TeacherTypeEnum teacherType)
         {
@@ -186,7 +186,7 @@ namespace DesignPatterns.A_Creational_Patterns
 
     #region Invoice Factory
 
-    #region Factory
+    #region Simple Factory
 
   
     public static class InvoiceFactory

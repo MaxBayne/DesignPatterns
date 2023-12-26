@@ -49,11 +49,11 @@ namespace DesignPatterns
 
             #endregion
 
-            #region Factory Pattern
+            #region Simple Factory Pattern
 
             Console.WriteLine("--------------------------------------------------------------");
 
-            Console.WriteLine("### Factory Pattern ###");
+            Console.WriteLine("### Simple Factory Pattern ###");
 
             /*
              * Make Factory Class To Create Any Children Classes Depend on Some Parameters
@@ -70,12 +70,29 @@ namespace DesignPatterns
             var truck = carFactory.CreateCar("T");
             truck.PrintName();
 
-            var permanent = TeacherFactory.CreateTeacher(TeacherTypeEnum.Permanent);
-            var contact = TeacherFactory.CreateTeacher(TeacherTypeEnum.Contract);
-            var templorary = TeacherFactory.CreateTeacher(TeacherTypeEnum.Templorary);
+            var permanent = TeacherSimpleFactory.CreateTeacher(TeacherTypeEnum.Permanent);
+            var contact = TeacherSimpleFactory.CreateTeacher(TeacherTypeEnum.Contract);
+            var templorary = TeacherSimpleFactory.CreateTeacher(TeacherTypeEnum.Templorary);
 
             var salesInvoice = InvoiceFactory.CreateInvoice(InvoiceTypeEnum.Sales);
             var purchasesInvoice = InvoiceFactory.CreateInvoice(InvoiceTypeEnum.Purchases);
+
+            #endregion
+
+            #region Factory Method Pattern
+
+            Console.WriteLine("--------------------------------------------------------------");
+
+            Console.WriteLine("### Factory Method Pattern ###");
+
+            /*
+             * Make Abstract Factory Class to create unknown classes with same family and let client implement that abstraction for more classes
+             */
+
+
+            var paypalPayment = new PaypalPaymentProcessor().ProcessPayment(1, 500);
+            var visaPayment = new VisaPaymentProcessor().ProcessPayment(2, 1400);
+            var masterPayment = new MasterPaymentProcessor().ProcessPayment(3, 4000);
 
             #endregion
 
@@ -92,7 +109,7 @@ namespace DesignPatterns
             Console.WriteLine("\n Build Full Robot");
             Console.WriteLine("----------------");
 
-            var fullRobot = new RobotBuilder(new Robot())
+            var fullRobot = new RobotBuilder()
                             .SetHead("Head of Robot")
                             .SetArms("Arms of Robot")
                             .SetLegs("Legs of Robot")
@@ -104,13 +121,26 @@ namespace DesignPatterns
 
             Console.WriteLine("\nBuild Limited Robot");
             Console.WriteLine("---------------------");
-            var limitedRobot = new RobotBuilder(new Robot())
+            var limitedRobot = new RobotBuilder()
                                     .SetHead("Head of Robot")
                                     .SetLegs("Legs of Robot")
                                     .Build();
             
             
             limitedRobot.PrintInfo();
+
+
+            Console.WriteLine("\nBuild Salary Calculator");
+            Console.WriteLine("-------------------------");
+
+            var salaryCalculator = new SalaryCalculatorBuilder().SetEmployeeId(100)
+                                                                .SetBasicSalary(2000)
+                                                                .SetTransportValue(500)
+                                                                .SetEatsValue(250)
+                                                                .SetTaxPercent(10)
+                                                                .Build();
+
+            salaryCalculator.PrintSalaryInfo();
 
             #endregion
 
