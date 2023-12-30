@@ -241,11 +241,13 @@ namespace DesignPatterns
              * Used To Add Functionality to another class without edit it
              */
 
-            var smsService = new ConcreteSmsService();
-            var emailDecorator = new SendSmsWithEmailDecorator("maxbayne@gmail.com");
+            var oldSmsSenderService = new SmsSenderService();
+            var smsSenderServiceWithEmailDecorator = new SmsSenderServiceEmailingDecorator(oldSmsSenderService);
+            var smsSenderServiceWithExceptionHandelDecorator = new SmsSenderServiceExceptionHandelDecorator(oldSmsSenderService);
 
-            emailDecorator.SetService(smsService);
-            Console.WriteLine(emailDecorator.SendSms(1, "01051545847", "Hello Decorator"));
+            smsSenderServiceWithEmailDecorator.SendSms(100, "01091281295", "Hello Man iam Max bayne");
+
+            smsSenderServiceWithExceptionHandelDecorator.SendSms(100, "", "Hello Man iam Max bayne");
 
             #endregion
 

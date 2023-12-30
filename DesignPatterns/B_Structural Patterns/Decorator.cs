@@ -6,49 +6,85 @@ using System.Threading.Tasks;
 
 namespace DesignPatterns.B_Structure_Patterns
 {
+    /* Decorator Pattern
+     * ----------------
+     * - the ability to add functionality to class without editing it mean not break princible (Open For Extend Closed For Modification) by using Decorator
+     */
 
-    public abstract class AbstractDecorator: SmsService
+    #region SmsSenderService Decorator
+
+    #region Old Class
+
+    public interface ISmsSenderService
     {
-        protected ISmsService _smsService;
-
-        public void SetService(ISmsService service)
-        {
-            _smsService = service;
-        }
-        
-
-        public override string SendSms(int userId, string mobile, string message)
-        {
-            return _smsService.SendSms(userId, mobile, message);
-        }
-       
+        void SendSms(int userId, string mobile, string message);
     }
 
-    public class SendSmsWithEmailDecorator: AbstractDecorator
+    public class SmsSenderService : ISmsSenderService
     {
-        private string _emailAddress;
-
-        public SendSmsWithEmailDecorator(string emailAddress)
+        public void SendSms(int userId, string mobile, string message)
         {
-            _emailAddress = emailAddress;
-        }
-
-        private string SendEmail(string email,string message)
-        {
-            return $"email sent to {email} with message {message}";
-        }
-
-        public override string SendSms(int userId, string mobile, string message)
-        {
-            var stringBuilder = new StringBuilder();
-
-            //Send Sms
-            stringBuilder.AppendLine(base.SendSms(userId, mobile, message));
-
-            //Send Email
-            stringBuilder.AppendLine(SendEmail(_emailAddress,message));
-
-            return stringBuilder.ToString();
+            Console.WriteLine($"(SmsSenderService) => Sending Sms message ({message}) to number #{mobile} by user #{userId}");
         }
     }
+
+    #endregion
+
+    #region New Class Decorators 
+
+    //we add new funcationality to class SmsService without editing SmsService Class just by using Decorator Pattern
+
+    //Adding Email Feature To SmsSenderService without alter SmsSenderService Class
+    public class SmsSenderServiceEmailingDecorator : ISmsSenderService
+    {
+        private readonly ISmsSenderService _smsSenderService;
+
+        public SmsSenderServiceEmailingDecorator(ISmsSenderService smsSenderService)
+        {
+            _smsSenderService = smsSenderService;
+        }
+
+        public void SendSms(int userId, string mobile, string message)
+        {
+            //use old / original logic
+            _smsSenderService.SendSms(userId, mobile, message);
+
+            //add some logic
+            Console.WriteLine("(SmsServiceEmailingDecorator) => we send email for sms message");
+        }
+    }
+
+    //Adding Excetion Handeling Feature to SmsSenderService without Alter SmsSenderService class
+    public class SmsSenderServiceExceptionHandelDecorator : ISmsSenderService
+    {
+        private readonly ISmsSenderService _smsSenderService;
+
+        public SmsSenderServiceExceptionHandelDecorator(ISmsSenderService smsSenderService)
+        {
+            _smsSenderService = smsSenderService;
+        }
+
+        public void SendSms(int userId, string mobile, string message)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(mobile))
+                    throw new Exception("Mobile Number Required");
+
+                //use old / original logic
+                _smsSenderService.SendSms(userId, mobile, message);
+            }
+            catch (Exception ex)
+            {
+                //Hanel Exception Here
+                Console.WriteLine($"(SmsSenderServiceExceptionHandelDecorator) => Handel Exception with Message ({ex.Message})");
+            }
+        }
+    }
+
+    #endregion
+
+
+
+    #endregion
 }
