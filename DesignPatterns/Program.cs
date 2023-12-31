@@ -578,6 +578,15 @@ namespace DesignPatterns
             mechanic.DisassembleCar(toyotaStrategy);
             mechanic.DisassembleCar(bmwStrategy);
 
+
+            //Select Discount Depend on Customer Category inside Invoice
+            new Invoice("Mohammed Salah", CustomerCategoryEnum.Simple, 15000).Print_Invoice_Info();
+            new Invoice("Ahmed Ali", CustomerCategoryEnum.Silver, 9000).Print_Invoice_Info();
+            new Invoice("Mona Adel", CustomerCategoryEnum.Gold, 17000).Print_Invoice_Info();
+            new Invoice("Mostafa Magdi", CustomerCategoryEnum.Diamond, 20000).Print_Invoice_Info();
+
+
+
             #endregion
 
             #region Template Pattern
