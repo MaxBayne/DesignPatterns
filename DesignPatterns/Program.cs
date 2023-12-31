@@ -596,15 +596,14 @@ namespace DesignPatterns
             Console.WriteLine("### Template Pattern ###");
 
             /*
-             * when we have shared steps and only few steps are changed then we use this pattern like pizza maker
+             * when we have shared steps and only few steps are changed then we use this pattern
              */
 
-            var cartByEmail = new CartByEmail();
-            var cartBySms = new CartBySms();
+            var onlineShopping = new OnlineShoppingCart("Ahmed Salah", CustomerCategoryEnum.Gold);
+            var onStoreShopping = new InStoreShoppingCart("Mido Ali", CustomerCategoryEnum.Silver);
 
-            cartByEmail.CheckOut();
-            Console.WriteLine("----------------");
-            cartBySms.CheckOut();
+            onlineShopping.Checkout(10000);
+            onStoreShopping.Checkout(5000);
 
             #endregion
 

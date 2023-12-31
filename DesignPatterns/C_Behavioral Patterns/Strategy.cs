@@ -96,8 +96,10 @@ public class Invoice
     public string CustomerName { get;private set; }
     public CustomerCategoryEnum CustomerCategory { get;private set; }
     public decimal TotalPrice { get;private set; }
-    public decimal DiscountValue { get;private set; }
-    public decimal NetPrice => TotalPrice - DiscountValue;
+    public decimal TaxPercent { get; set; }
+    public decimal TaxAmount => TotalPrice * TaxPercent;
+    public decimal DiscountAmount { get;private set; }
+    public decimal NetPrice => TotalPrice - DiscountAmount + TaxAmount;
 
     private IDiscountStrategy _discountStrategy;
 
@@ -127,14 +129,18 @@ public class Invoice
                 break;
         }
 
-        DiscountValue = _discountStrategy.CalculateDiscount(TotalPrice);
+        DiscountAmount = _discountStrategy.CalculateDiscount(TotalPrice);
 
     }
 
+    public void SetDiscount(decimal dicsountAmount)
+    {
+        DiscountAmount = dicsountAmount;
+    }
 
     public void Print_Invoice_Info()
     {
-        Console.WriteLine($"Created Invoice For Customer ({CustomerName}) with Category ({CustomerCategory}) with TotalPrice = {TotalPrice},Discount = {DiscountValue} , NetPrice= {NetPrice} ");
+        Console.WriteLine($"Created Invoice For Customer ({CustomerName}) with Category ({CustomerCategory}) with TotalPrice = {TotalPrice},Discount = {DiscountAmount} , NetPrice= {NetPrice} ");
     }
 
 }
