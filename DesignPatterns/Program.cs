@@ -2,7 +2,7 @@
 using DesignPatterns.A_Creational_Patterns;
 using DesignPatterns.B_Structure_Patterns;
 using DesignPatterns.C_Behavioral_Patterns;
-using Action = DesignPatterns.C_Behavioral_Patterns.Action;
+using DesignPatterns.C_Behavioral_Patterns.StatePattern;
 
 namespace DesignPatterns
 {
@@ -549,14 +549,34 @@ namespace DesignPatterns
 
             var vehicle = new Vehicle();
 
-            Console.WriteLine(vehicle.ToString());
+            vehicle.StartVehicle();
 
-            vehicle.ChangeState(Action.Start);
-            Console.WriteLine(vehicle.ToString());
-            vehicle.ChangeState(Action.Accelerate);
-            Console.WriteLine(vehicle.ToString());
-            vehicle.ChangeState(Action.Stop);
-            Console.WriteLine(vehicle.ToString());
+            vehicle.AccelerateVehicle();
+
+            vehicle.StopVehicle();
+
+            Console.WriteLine("");
+            ///////////////////////////////////
+
+            var order = new Order();
+            
+            order.SetCustomer("Mohammed Salah");
+            
+            order.AddOrderLine(100, "Item1", 5, 1200);
+            order.AddOrderLine(200, "Item2", 3, 4100);
+            order.AddOrderLine(300, "Item3", 2, 500);
+
+            order.CancelOrder();
+
+            order.ConfirmOrder();
+
+            order.ProcessOrder();
+
+            order.ShippedOrder();
+
+            order.DeliverOrder();
+
+            order.ReturnOrder();
 
             #endregion
 
