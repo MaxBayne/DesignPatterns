@@ -208,6 +208,9 @@ namespace DesignPatterns.C_Behavioral_Patterns
                 OrderLines.Add(new OrderLine(id,name,quantity,unitPrice));
             }
 
+            public OrderLine FirstOrderLine() => OrderLines.FirstOrDefault()!;
+            public OrderLine LastOrderLine() => OrderLines.LastOrDefault()!;
+
             public void DraftOrder()
             {
                 try

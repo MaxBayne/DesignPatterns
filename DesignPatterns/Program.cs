@@ -2,6 +2,7 @@
 using DesignPatterns.A_Creational_Patterns;
 using DesignPatterns.B_Structure_Patterns;
 using DesignPatterns.C_Behavioral_Patterns;
+using DesignPatterns.C_Behavioral_Patterns.OrderCommand;
 using DesignPatterns.C_Behavioral_Patterns.StatePattern;
 
 namespace DesignPatterns
@@ -404,20 +405,28 @@ namespace DesignPatterns
             Console.WriteLine("### Command Pattern ###");
 
             /*
-             * Execute Command By Invoker From Sender to Receiver 
+             * Execute Command By Invoker 
              */
 
+            //create Commands and store it inside list of command inside command invoker and just invoke them
 
-            IInvoker invoker = new Invoker("osama");
+            var order = new Order();
 
-            IReceiver receiverAhmed = new Receiver("ahmed");
-            IReceiver receiverKhalid = new Receiver("kalid");
+            //create commands
+            var addOrderLineCommand = new AddOrderLineCommand(order,100,"Item1",15,100);
+            var setCustomerCommand = new SetCustomerCommand(order, "Ahmed Ali");
+            var printOrderLineCommand = new PrintOrderLineCommand(100, "Item1", 15, 100);
 
-            ICommand sendMoneyCmd = new SendMoneyToSingleCommand(receiverAhmed);
-            ICommand sendMoneyCmd2 = new SendMoneyToSingleCommand(receiverKhalid);
+            //store commands inside list
+            var commandsInvoker = new CommandsInvokers();
+            commandsInvoker.AddCommand(addOrderLineCommand);
+            commandsInvoker.AddCommand(setCustomerCommand);
+            commandsInvoker.AddCommand(printOrderLineCommand);
 
-            invoker.Invoke(sendMoneyCmd);
-            invoker.Invoke(sendMoneyCmd2);
+            //invoke commands stored inside invoker
+            commandsInvoker.InvokeCommands();
+
+
             #endregion
 
             #region Interpreter Pattern
@@ -558,25 +567,25 @@ namespace DesignPatterns
             Console.WriteLine("");
             ///////////////////////////////////
 
-            var order = new Order();
-            
-            order.SetCustomer("Mohammed Salah");
-            
-            order.AddOrderLine(100, "Item1", 5, 1200);
-            order.AddOrderLine(200, "Item2", 3, 4100);
-            order.AddOrderLine(300, "Item3", 2, 500);
+            var myOrder = new Order();
 
-            order.CancelOrder();
+            myOrder.SetCustomer("Mohammed Salah");
 
-            order.ConfirmOrder();
+            myOrder.AddOrderLine(100, "Item1", 5, 1200);
+            myOrder.AddOrderLine(200, "Item2", 3, 4100);
+            myOrder.AddOrderLine(300, "Item3", 2, 500);
 
-            order.ProcessOrder();
+            myOrder.CancelOrder();
 
-            order.ShippedOrder();
+            myOrder.ConfirmOrder();
 
-            order.DeliverOrder();
+            myOrder.ProcessOrder();
 
-            order.ReturnOrder();
+            myOrder.ShippedOrder();
+
+            myOrder.DeliverOrder();
+
+            myOrder.ReturnOrder();
 
             #endregion
 
