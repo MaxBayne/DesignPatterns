@@ -1,112 +1,178 @@
-﻿namespace DesignPatterns.C_Behavioral_Patterns;
-
-
-#region Request
-
-public enum RequestType
+﻿namespace DesignPatterns.C_Behavioral_Patterns
 {
-    Conference,
-    Purchase,
-    Sales
-}
+    /*
+     * Chain Of Responsibility
+     * -----------------------
+     * its use case for request that will move over chain of handlers and only one handler can process this request depend on some rules
+     * Middleware is example of Chain of Responsibility
+     */
 
-public interface IRequest
-{
-    RequestType RequestType { get; }
+    #region Vacation Request Chain Of Responsibility
 
-    double Amount { get; }
-}
+    #region Request
 
-public class Request : IRequest
-{
-    public RequestType RequestType { get; }
-    public double Amount { get; }
-
-    public Request(RequestType requestType, double amount)
+    public enum RequestType
     {
-        RequestType = requestType;
-        Amount = amount;
+        TeamLeader,
+        TechnicalLeader,
+        CTO,
+        CEO
     }
-}
+
+    public interface IRequest
+    {
+        RequestType RequestType { get; }
+    }
+
+    public abstract class Request : IRequest
+    {
+        public RequestType RequestType { get; private set; }
+
+        public Request(RequestType requestType)
+        {
+            RequestType = requestType;
+        }
+    }
 
 
-#endregion
 
-#region Handler
+    public class VacationRequest : Request
+    {
+        public string EmployeeName { get; private set; }
+        public int VacationDays { get; private set; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
 
-public interface IHandler
-{
-    string Name { get; }
-    IHandler AboveSuccessor { get; }
+        public VacationRequest(RequestType requestType,string employeeName,DateTime startDate,int days):base(requestType)
+        {
+            EmployeeName = employeeName;
+            VacationDays = days;
+            StartDate = startDate;
+            EndDate = startDate.AddDays(days);
+        }
+    }
 
-    void HandelRequest(IRequest request);
-}
 
-public abstract class Handler:IHandler
-{
-    public string Name { get; }
-    public IHandler AboveSuccessor { get; }
+    #endregion
+
+    #region Handler
+
+    public interface IHandler
+    {
+        void SetNextHandler(IHandler nextHandler);
+
+        void ProcessRequest(IRequest request);
+    }
+
+    public abstract class Handler : IHandler
+    {
+        protected IHandler? _nextHandler;
+
+        public void SetNextHandler(IHandler nextHandler)
+        {
+            _nextHandler = nextHandler;
+        }
+
+        public abstract void ProcessRequest(IRequest request);
+        
+    }
+
+
     
 
-    public Handler(string name,IHandler aboveSuccessor)
+    public class TeamLeaderHandler : Handler
     {
-        Name=name;
-        AboveSuccessor = aboveSuccessor;
-    }
-
-    public abstract void HandelRequest(IRequest request);
-}
-
-
-public class Director : Handler
-{
-    public Director(string name, IHandler aboveSuccessor) : base(name, aboveSuccessor) { }
-
-    public override void HandelRequest(IRequest request)
-    {
-        if (request.RequestType == RequestType.Conference)
+        public override void ProcessRequest(IRequest request)
         {
-            Console.WriteLine("Director handel the Conference Request");
-        }
-        else
-        {
-            Console.WriteLine("Director cant handel the Request");
-            AboveSuccessor.HandelRequest(request);
-        }
-
-    }
-}
-
-public class Vp : Handler
-{
-    public Vp(string name, IHandler aboveSuccessor) : base(name, aboveSuccessor) { }
-
-    public override void HandelRequest(IRequest request)
-    {
-        if (request.RequestType == RequestType.Purchase && request.Amount<=1500)
-        {
-            Console.WriteLine("VP handel the Purchase Request less than 1500");
-        }
-        else
-        {
-            Console.WriteLine("VP cant handel the Request");
-            AboveSuccessor.HandelRequest(request);
+            if (request.RequestType == RequestType.TeamLeader)
+            {
+                Console.WriteLine("TeamLeader handel the Vacation Request");
+                
+            }
+            else
+            {
+                if (_nextHandler != null)
+                {
+                    _nextHandler?.ProcessRequest(request);
+                }
+                else
+                {
+                    Console.WriteLine("No Handler Found For Vacation Request");
+                }
+                
+            }
         }
     }
-}
 
-public class Ceo : Handler
-{
-    public Ceo(string name) : base(name, null!) {}
-
-    public override void HandelRequest(IRequest request)
+    public class TechnicalLeadHandler : Handler
     {
-        Console.WriteLine("Ceo Handel the Request");
+        public override void ProcessRequest(IRequest request)
+        {
+            if (request.RequestType == RequestType.TechnicalLeader)
+            {
+                Console.WriteLine("TechnicalLeader handel the Vacation Request");
+
+            }
+            else
+            {
+                if (_nextHandler != null)
+                {
+                    _nextHandler?.ProcessRequest(request);
+                }
+                else
+                {
+                    Console.WriteLine("No Handler Found For Vacation Request");
+                }
+            }
+        }
     }
+
+    public class CtoHandler : Handler
+    {
+        public override void ProcessRequest(IRequest request)
+        {
+            if (request.RequestType == RequestType.CTO)
+            {
+                Console.WriteLine("Cto handel the Vacation Request");
+            }
+            else
+            {
+                if (_nextHandler != null)
+                {
+                    _nextHandler?.ProcessRequest(request);
+                }
+                else
+                {
+                    Console.WriteLine("No Handler Found For Vacation Request");
+                }
+            }
+        }
+    }
+
+    public class CeoHandler : Handler
+    {
+        public override void ProcessRequest(IRequest request)
+        {
+            if (request.RequestType == RequestType.CEO)
+            {
+                Console.WriteLine("CEO handel the Vacation Request");
+            }
+            else
+            {
+                if (_nextHandler != null)
+                {
+                    _nextHandler?.ProcessRequest(request);
+                }
+                else
+                {
+                    Console.WriteLine("No Handler Found For Vacation Request");
+                }
+            }
+        }
+    }
+     
+    #endregion
+
+    #endregion
+
 }
-
-
-#endregion
-
-
-

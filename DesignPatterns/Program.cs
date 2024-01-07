@@ -357,20 +357,23 @@ namespace DesignPatterns
              * Send Request To Multi Handlers inside Chain and Each Handel Process Request if he can do it then will send Response other wise push it to the next handler inside the chain
             */
 
-            //Create Handels
-            var ceo = new Ceo("ceo mohammed");
-            var vp = new Vp("vp mostafa", ceo);
-            var director = new Director("Ahmed Director", vp);
-
             //Create Requests
-            var conferenceRequest = new Request(RequestType.Conference, 0);
-            var purchaseRequest = new Request(RequestType.Purchase, 1200);
-            var purchaseHighRequest = new Request(RequestType.Purchase, 2500);
+            var vacationRequest = new VacationRequest(RequestType.CTO, "Ahmed", DateTime.Now, 5);
 
-            //Path Request To Chain of Handelers
-            director.HandelRequest(conferenceRequest);
-            vp.HandelRequest(purchaseRequest);
-            vp.HandelRequest(purchaseHighRequest);
+            //Create Handels
+            var teamLeaderHandler = new TeamLeaderHandler();
+            var technicalLeaderHandler = new TechnicalLeadHandler();
+            var ctoHandler = new CtoHandler();
+            var ceoHandler = new CeoHandler();
+
+            //Build Chain of Handlers that request will pass throw until found the handler that will handle it
+            teamLeaderHandler.SetNextHandler(technicalLeaderHandler);
+            technicalLeaderHandler.SetNextHandler(ctoHandler);
+            ctoHandler.SetNextHandler(ceoHandler);
+
+            //Pass Request to first handler inside chain
+            teamLeaderHandler.ProcessRequest(vacationRequest);
+
 
             #endregion
 

@@ -1,49 +1,73 @@
-﻿namespace DesignPatterns.C_Behavioral_Patterns;
-
-public record Memento(string Name, int Age);
-
-public class Player
+﻿namespace DesignPatterns.C_Behavioral_Patterns
 {
-    public string Name { get; set; }
-    public int Age { get; set; }
+    /*
+     * Memento Pattern
+     * ---------------
+     * its like take snapshot from object and can restore that snapshot at any time
+     */
 
-    public Player(string name,int age)
+    #region Player Memento
+
+    //snapshot
+    public class PlayerMemento
     {
-        Name=name;
-        Age=age;
+        public string Name { get; private set; }
+        public int Age { get; private set; }
+
+        public PlayerMemento(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
     }
 
-    public Memento CreateMemento() => new Memento(Name, Age);
-    
-    public void UndoMemento(Memento memento)
+
+    public class Player
     {
-        Name = memento.Name;
-        Age = memento.Age;
+        public string Name { get; set; }
+        public int Age { get; set; }
+
+        public Player(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+
+        public PlayerMemento CreateMemento() => new PlayerMemento(Name, Age);
+
+        public void UndoMemento(PlayerMemento memento)
+        {
+            Name = memento.Name;
+            Age = memento.Age;
+        }
+
+        public override string ToString()
+        {
+            return $"Player ({Name}) with Age ({Age})";
+        }
     }
 
-    public override string ToString()
+    public class Manager
     {
-        return $"Player ({Name}) with Age ({Age})";
+        private readonly Stack<PlayerMemento> _stack;
+
+        public Manager()
+        {
+            _stack = new Stack<PlayerMemento>();
+        }
+
+        public void PushMemento(PlayerMemento memento)
+        {
+            _stack.Push(memento);
+        }
+
+        public PlayerMemento PopMemento()
+        {
+            return _stack.Pop();
+        }
     }
+
+    #endregion
+
+
 }
-
-public class Manager
-{
-    private readonly Stack<Memento> _stack;
-
-    public Manager()
-    {
-        _stack = new Stack<Memento>();
-    }
-
-    public void PushMemento(Memento memento)
-    {
-        _stack.Push(memento);
-    }
-
-    public Memento PopMemento()
-    {
-        return _stack.Pop();
-    }
-}
-

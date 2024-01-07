@@ -114,12 +114,21 @@ namespace DesignPatterns.C_Behavioral_Patterns
                 _commands.Remove(command);
             }
 
+            public void ClearCommands()
+            {
+                _commands.Clear();
+            }
+
+
+
             public async Task InvokeCommandsAsync()
             {
                 foreach (var command in _commands)
                 {
                     await command.ExecuteAsync();
                 }
+
+                ClearCommands();
             }
 
             public void InvokeCommands()
@@ -128,6 +137,8 @@ namespace DesignPatterns.C_Behavioral_Patterns
                 {
                     command.ExecuteAsync();
                 }
+
+                ClearCommands();
             }
         }
 
